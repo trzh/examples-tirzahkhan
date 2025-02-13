@@ -6,6 +6,7 @@ format:
     toc: true
     toc-location: left
 editor: visual
+---vtool
 ---
 
 The purpose of this assignment is for you to get some experience estimating and interpreting a discrete choice model by
