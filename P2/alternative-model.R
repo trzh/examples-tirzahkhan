@@ -231,7 +231,7 @@ alt_model <- mlogit(choice ~ 0 |
                       med_cond_impact +
                       density | 0,
                     veh_dfidx_train,
-                    reflevel = "Zero")
+                    reflevel = "Suff.")
 
 summary(alt_model)
 
