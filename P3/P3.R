@@ -94,8 +94,6 @@ only_rel_com_trips <- rel_com_count |>
   group_by(HOUSEID, PERSONID) |>
   select(HOUSEID, PERSONID, n_rel_com)
 
-# Redundant creation of rel_com_trips
-
 rel_com_trips <- trip_data |>
   filter(purpose == "TRUE") |>
   group_by(HOUSEID, PERSONID) |>
