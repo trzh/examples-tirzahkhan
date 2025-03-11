@@ -66,9 +66,6 @@ trip_data <- here("data",
          TRIPPURP,
          WHYFROM,
          WHYTO,
-         TRPTRANS, 
-         R_AGE,
-         EDUC,
          WTTRDFIN)
 ```
 
