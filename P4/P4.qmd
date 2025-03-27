@@ -91,7 +91,7 @@ state <- "mi"
 year <- "2021"
 
 traverse_counties_5_digit <- c("26019", "26055", "26079", "26089")
-traverse_counties_3_digit <- substr(traverse_counties_5_digit, 4, 5)
+traverse_counties_3_digit <- substr(traverse_counties_5_digit, 3, 5)
 
 url <- paste0("https://lehd.ces.census.gov/data/lodes/LODES8/",
               state,
@@ -325,7 +325,7 @@ Now let's load the street network. We'll use the OpenStreetMap network, which we
 
 -   Download the pbf file and save it to the folder you created.
 
-```{r bbbike-gif}
+```{r bbbike-gif, echo=FALSE}
 
 here("P4",
      "gifs",
