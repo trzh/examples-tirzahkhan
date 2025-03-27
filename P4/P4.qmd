@@ -384,6 +384,14 @@ base_map <- get_tiles(street_lines,
                       zoom = 8,
                       crop = TRUE)
 
+ggplot() +
+  geom_spatraster_rgb(data = base_map) +
+  geom_sf(data = trip_gen_locs,
+          color = "palegreen3",
+          fill = "palegreen") +
+  geom_sf(data = street_lines,
+          color =  "salmon") +
+  theme_void()
 
 ```
 
