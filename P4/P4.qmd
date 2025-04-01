@@ -925,7 +925,8 @@ Since these functions take a long time to run, we'll write the results to file.
 flow_tt <- flow_tt |>
   select(-goods_flow_est,
          -trade_flow_est,
-         -serve_flow_est)
+         -serve_flow_est,
+         -total_flow_est)
 
 ## Calibrate goods beta
 calibrated_flows_goods <- grvty_calibrate(obs_flow_tt = flow_tt,
