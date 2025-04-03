@@ -61,7 +61,7 @@ This is assuming you're using the same alternative scenario that you used for pr
 
 -   Do this for both the base scenario and the alternative scenario you've created.
 
-```{r}
+```{r, echo=FALSE}
 
 here("T3",
      "gifs",
