@@ -55,9 +55,7 @@ This is assuming you're using the same alternative scenario that you used for pr
 
 -   Select the scenario you want to run (the options should be "Base" and the other scenario that you've previously modified in the `*.scenarios` file).
 
--   Right-click on and of the model steps and select "Run \>", then "Run Range of Steps". Hold down the Shift or Ctrl key while selecting "Work From Home" and "Trip Generation." You don't need to rerun the Initialization and Vehicle Availability steps because you still have the outputs from those steps saved.
-
--   Then go get a snack or go for a walk to look at birds or squirrels or something. On my computer, this part of the model run takes ten or fifteen minutes.
+-   Right-click on and of the model steps and select "Run \>", then "Run Range of Steps". Hold down the Shift or Ctrl key while selecting "Other Trips" and "Trip Distribution."
 
 -   Do this for both the base scenario and the alternative scenario you've created.
 
