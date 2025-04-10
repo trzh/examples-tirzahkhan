@@ -47,7 +47,7 @@ devtools::install_github("gregmacfarlane/omxr")
 devtools::install_github("mattflor/chorddiag")
 ```
 
-## Run the trip generation model for each scenario
+## Run the trip distribution model for each scenario
 
 This is assuming you're using the same alternative scenario that you used for prior assignments.
 

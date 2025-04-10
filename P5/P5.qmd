@@ -80,7 +80,7 @@ I want to identify trip that could conceivably be considered to be withing walki
 ```{r}
 
 short_sr_visit_trips <- sr_visit_trips |>
-  filter(TRPMILAD < 1.5)
+  filter(TRPMILES < 1.5)
 
 nrow(short_sr_visit_trips)
 ```
