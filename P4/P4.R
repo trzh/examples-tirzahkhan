@@ -258,6 +258,9 @@ initial_betas <- tibble(`Worker sector` = names(betas),
 
 kable(initial_betas, digits = 3)
 
+kable(betas_table, digits = 3)
+
+
 ###
 # Visualize travel time sensitivity
 
@@ -475,8 +478,6 @@ plot_flows(flow_tt,
 plot_flows(flow_tt, 
            obs_col_name = "flow_total",
            est_col_name = "total_flow_est")
-
-
 
 ###
 # Calibrate the gravity model
