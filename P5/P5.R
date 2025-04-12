@@ -185,7 +185,7 @@ export_summs(model,
 
 effect_plot(model, pred = "TRPMILES", interval = TRUE) +
   scale_x_continuous(name = "Trip distance (miles)",
-                     breaks = seq(0, 1.5, by  =0.1)) +
+                     breaks = seq(0, 1.5, by=0.1)) +
   scale_y_continuous(name = "Probabilitity of walking",
                      breaks = breaks <- seq(0, 0.8, by = 0.1),
                      labels = paste0(breaks*100, "%"))
@@ -195,9 +195,24 @@ effect_plot(model, pred = "TRPMILES", interval = TRUE) +
 
 effect_plot(model = model, pred = "medcond", interval = TRUE) +
   scale_y_continuous(name = "Probability of walking for a particular trip",
-                     breaks = breaks <- seq(0.11, 0.23, by=0.01),
+                     breaks = breaks <- seq(0, 100, by=0.1),
                      labels = paste0(breaks*100, "%")) +
   scale_x_discrete(name = paste0("Does this person have a disability or\n",
                                  "medical condition that makes it difficult\n",
                                  "to travel outside the home?"),
+                   labels = c("No", "Yes"))
+
+effect_plot(model = model, pred = "suburb", interval = TRUE) +
+  scale_y_continuous(name = "Probability of walking for a particular trip",
+                     breaks = breaks <- seq(0, 100, by=0.1),
+                     labels = paste0(breaks*100, "%")) +
+  scale_x_discrete(name = paste0("Did this person take a trip that started\n",
+                                 "in a suburban block group?"),
+                   labels = c("No", "Yes"))
+
+effect_plot(model = model, pred = "immigrant", interval = TRUE) +
+  scale_y_continuous(name = "Probability of walking for a particular trip",
+                     breaks = breaks <- seq(0, 100, by=0.1),
+                     labels = paste0(breaks*100, "%")) +
+  scale_x_discrete(name = paste0("Was this person born in the U.S.?"),
                    labels = c("No", "Yes"))
