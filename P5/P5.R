@@ -84,28 +84,6 @@ short_sr_health_trips |>
 sample_trips <- short_sr_health_trips |>
   filter(TRPMILES >=0)
 
-ggplot(sample_trips) +
-  geom_histogram(aes(x = TRPMILES),
-                 color = "cornflowerblue",
-                 fill = "lavender",
-                 binwidth = 0.1) +
-  scale_x_continuous(name = "Trip distance (miles)",
-                     breaks = seq(0, 1.5, by=0.1)) +
-  scale_y_continuous(name = "Number of trips in sample") +
-  theme_minimal()
-
-# Age
-
-ggplot(sample_trips) +
-  geom_histogram(aes(x = R_AGE),
-                 color = "cornflowerblue",
-                 fill = "lavender",
-                 binwidth = 1) +
-  scale_x_continuous(name = "Traveler's age (years)",
-                     breaks = seq(0, 1.5, by=0.1)) +
-  scale_y_continuous(name = "Number of trips in sample") +
-  theme_minimal()
-
 # Medical condition status
 
 medcond_data <- people |>
@@ -124,11 +102,10 @@ sample_trips |>
 
 # Suburb indicator
 
-suburb_data <- trips |>
-  select(HOUSEID, PERSONID, OBHUR)
+sample_trips <- sample_trips |>
+  filter(OBHUR != "-9")
 
 sample_trips <- sample_trips |>
-  left_join(suburb_data) |>
   mutate(suburb = OBHUR == "S")
 
 sample_trips |>
@@ -138,7 +115,7 @@ sample_trips |>
            paste0(round(100*`Number of trips`/sum(`Number of trips`)), "%")) |>
   kable()
 
-# Born in USA
+# Immigrant indicator
 
 immigrant_data <- people |>
   select(HOUSEID, PERSONID, BORNINUS)
@@ -153,8 +130,6 @@ sample_trips |>
   mutate(`Percent of trips` = 
            paste0(round(100*`Number of trips`/sum(`Number of trips`)), "%")) |>
   kable()
-
-nrow(sample_trips)
 
 ###
 # Estimate model
@@ -180,10 +155,40 @@ export_summs(model,
              error_format = "(p = {p.value})",
              error_pos = "right")
 
+######
+# Visualizations
+
+# Distance
+
+ggplot(sample_trips) +
+  geom_histogram(aes(x = TRPMILES),
+                 color = "cornflowerblue",
+                 fill = "lavender",
+                 binwidth = 0.1) +
+  scale_x_continuous(name = "Trip distance (miles)",
+                     breaks = seq(0, 1.5, by=0.1)) +
+  scale_y_continuous(name = "Number of trips in sample") +
+  theme_minimal()
+
+# Age
+
+ggplot(sample_trips) +
+  geom_histogram(aes(x = R_AGE),
+                 color = "cornflowerblue",
+                 fill = "lavender",
+                 binwidth = 1) +
+  scale_x_continuous(name = "Traveler's age (years)",
+                     breaks = seq(0, 1.5, by=0.1)) +
+  scale_y_continuous(name = "Number of trips in sample") +
+  theme_minimal()
+
 ###
 # Plot predicted probabilities of walking
 
-effect_plot(model, pred = "TRPMILES", interval = TRUE) +
+effect_plot(model,
+            pred = "TRPMILES",
+            colors = "cornflowerblue",
+            interval = TRUE) +
   scale_x_continuous(name = "Trip distance (miles)",
                      breaks = seq(0, 1.5, by=0.1)) +
   scale_y_continuous(name = "Probabilitity of walking",
@@ -193,26 +198,35 @@ effect_plot(model, pred = "TRPMILES", interval = TRUE) +
 ###
 # Plot categorical predictors
 
-effect_plot(model = model, pred = "medcond", interval = TRUE) +
+effect_plot(model = model,
+            pred = "medcond",
+            colors = "cornflowerblue",
+            interval = TRUE) +
   scale_y_continuous(name = "Probability of walking for a particular trip",
-                     breaks = breaks <- seq(0, 100, by=0.1),
+                     breaks = breaks <- seq(0, 100, by=0.01),
                      labels = paste0(breaks*100, "%")) +
   scale_x_discrete(name = paste0("Does this person have a disability or\n",
                                  "medical condition that makes it difficult\n",
                                  "to travel outside the home?"),
                    labels = c("No", "Yes"))
 
-effect_plot(model = model, pred = "suburb", interval = TRUE) +
+effect_plot(model = model,
+            pred = "suburb",
+            colors = "cornflowerblue",
+            interval = TRUE) +
   scale_y_continuous(name = "Probability of walking for a particular trip",
-                     breaks = breaks <- seq(0, 100, by=0.1),
+                     breaks = breaks <- seq(0, 100, by=0.01),
                      labels = paste0(breaks*100, "%")) +
   scale_x_discrete(name = paste0("Did this person take a trip that started\n",
                                  "in a suburban block group?"),
                    labels = c("No", "Yes"))
 
-effect_plot(model = model, pred = "immigrant", interval = TRUE) +
+effect_plot(model = model,
+            pred = "immigrant",
+            colors = "cornflowerblue",
+            interval = TRUE) +
   scale_y_continuous(name = "Probability of walking for a particular trip",
-                     breaks = breaks <- seq(0, 100, by=0.1),
+                     breaks = breaks <- seq(0, 100, by=0.01),
                      labels = paste0(breaks*100, "%")) +
   scale_x_discrete(name = paste0("Was this person born in the U.S.?"),
                    labels = c("No", "Yes"))
